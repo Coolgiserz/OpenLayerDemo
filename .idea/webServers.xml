@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="dc658ae4-09cd-433f-9344-9ca239a70a18" name="TestMyGIS" url="http://localhost:8080">
+        <fileTransfer port="0" mountedRoot="$USER_HOME$/Softwares/webgis/apache-tomcat-9.0.19/webapps/WebGIS/TestWeb" accessType="MOUNT" />
+      </webServer>
+      <webServer id="8b0e2d60-b755-423d-b490-b4ac516f6b0d" name="WEBAI" url="http://47.104.28.111">
+        <fileTransfer host="47.104.28.111" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

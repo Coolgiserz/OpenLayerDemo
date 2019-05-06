@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Layer vv</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--AMap API:"https://webapi.amap.com/maps?v=1.4.14&key=您申请的key值"-->
+    <!--<script src="https://webapi.amap.com/maps?v=1.4.14&key=be9fdbf0f9078750c8a9699a158af869"></script>-->
+
+
+    <!--Baidu Map API:http://api.map.baidu.com/api?v=2.0&ak=您申请的key值-->
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=pICBIMyafjQ6D4l9rihPXzs1KLXHmzVs" type="text/javascript"></script>
+    <!--TMap-->
+    <!--<script src="http://api.tianditu.gov.cn/api?v=4.0&tk=2e1e0958d50f81774142f573f690f97d" type="text/javascript"></script>-->
+    <!--<script src="http://t0.tianditu.gov.cn/vec_c/wmts?tk=c1c2becf601083a96d1623539a3ea776" type="text/javascript"></script>-->
+    <script src="support/jquery.js"></script>
+
+    <link rel="stylesheet" href="support/ol.css">
+    <script src="support/ol-debug.js"></script>
+    <link rel="stylesheet" href="lib/mygis.css">
+
+    <script src="lib/CoolMapLib.js"></script>
+    <script src="lib/Connector.js"></script>
+    <script src="lib/UUID.js"></script>
+
+    <script>
+        var mapcontrol;
+        $(document).ready(function (){
+           initMap(); 
+        });
+        
+        function initMap() {
+            mapcontrol =new MapControl({
+                target:"mapcontrol",
+                backgroundMap:"BAIDUMAP" //Tile:{,,GOOGLEMAP,OPEN_STREET_MAP,,GOOGLE_SATELLITE,AMAP_TILE},Map:{AMAP,BAIDUMAP,TIANDITU}
+
+            })
+        }
+        function changeDraw() {
+            var sel = $("#sel").val();
+            mapcontrol._setDrawOperation(sel);
+        };
+
+        $("#magicbtn").click(function () {
+            saveFeature();
+
+        });
+
+        function saveFeature() {
+            //
+            alert('click@');
+            console.log(mapcontrol._olMap.getInteractions());
+            var inter = mapcontrol._olMap.getInteractions();
+
+        }
+    </script>
+</head>
+<body>
+<div>
+<select id='sel' onchange="changeDraw()">
+    <option value="SELECT">选择</option>
+    <option value="POINT">点</option>
+    <option value="LINESTRING">线</option>
+    <option value="POLYGON">面</option>
+</select>
+    <button id="magicbtn" type="button">神奇的按钮</button>
+</div>
+<div id="mapcontrol"></div>
+</body>
+</html>

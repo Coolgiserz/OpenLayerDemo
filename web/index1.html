@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>HelloMap</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="support/ol.css" type="text/css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script language="javascript" type="text/javascript" src="support/ol-debug.js"></script>
+
+        <script language="javascript" type="text/javascript" src="support/jquery.js"></script>
+        <script>
+            $(document).ready(function () {
+//                initOSMMap();
+//                addWmsLayer();
+//                testAddLayer();
+                initAMap();
+            });
+
+            function testAddLayer() {
+                var wmsSource = new ol.source.ImageWMS({
+                    url: 'http://localhost:8080/geoserver/wms',
+                    params: {
+                        'LAYERS': 'topp:states'
+                    },
+                    serverType: 'geoserver',
+//                crossOrigin: 'anonymous'
+                });
+                var test = new ol.Map({
+                    layers: [
+                        new ol.layer.Tile({
+                            source: wmsSource
+                        })
+                    ],
+                    target: 'geomap',
+                    controls: ol.control.defaults({
+                        attributionOptions: {
+                            collapsible: false
+                        }
+                    }),
+                    view: new ol.View({
+                        center: [0, 0],
+                        zoom: 2
+                    })
+                });
+
+
+//                test.addLayer(test);
+
+
+            }
+            function addWmsLayer() {
+                var wmsLayer = new ol.layer.Image({
+                    source: wmsSource
+                });
+            }
+            ;
+            function initOSMMap() {
+                var osmmap = new ol.Map({
+                    layers: [
+                        //OSM
+                  
+                        new ol.layer.Tile({
+                            source: new ol.source.OSM()//OSM Map
+                        }),
+
+                        new ol.layer.Image({
+                            visible: true,
+                            source: new ol.source.ImageWMS({
+                                url: "http://localhost:8080/geoserver/wms", //url for wms service
+                                params: {
+                                    'LAYERS': 'topp:states', // set the layer
+                                    'VERSION': '1.1.1'
+                                },
+                                projection: 'EPSG:4326',
+                            })
+                        }),
+                    ],
+                    target: 'osmmap',
+                    controls: ol.control.defaults({
+                        attributionOptions: {
+                            collapsible: false
+                        }
+                    }),
+                    view: new ol.View({
+                        center: [0, 0],
+                        zoom: 2
+                    })
+                });
+            }
+            ;
+            function initAMap() {
+                var googlemap = new ol.Map({
+                    layers: [
+                        new ol.layer.Tile({
+                            title: "First AMap",
+//                            source: new ol.source.XYZ({
+//                                url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+//                            }),//AMap
+////                            source: new ol.source.XYZ({url: 'http://mt1.google.cn/vt/lyrs=h&x={x}&y={y}&z={z}'}), 
+
+                            //google map
+                            source: new ol.source.XYZ({
+                                url: 'http://www.google.cn/maps/vt/pb=!1m4!1m3!1i{z}!2i{x}!3i{y}!2m3!1e0!2sm!3i380072576!3m8!2szh-CN!3scn!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0'
+                            })
+
+                        }),
+
+                        new ol.layer.Image({
+                            visible: true,
+                            source: new ol.source.ImageWMS({
+                                url: "http://localhost:8080/geoserver/wms", //url for wms service
+                                params: {
+                                    'LAYERS': 'topp:states', // set the layer
+                                    'VERSION': '1.1.1'
+                                },
+                                projection: 'EPSG:4326',
+                            })
+                        }),
+                    ],
+                    target: 'osmmap',
+                    controls: ol.control.defaults({
+                        attributionOptions: {
+                            collapsible: false
+                        }
+                    }),
+                    view: new ol.View({
+//                        center: [60,50],
+                        center: [40, 74],
+
+                        zoom: 5
+                    })
+                });
+            }
+            ;
+
+
+        </script>
+    </head>
+
+    <body>
+        <div id="osmmap" class="map" tabindex="0"></div>
+        <div id="geomap" class="map" tabindex="0"></div>
+
+
+    </body>
+</html>
